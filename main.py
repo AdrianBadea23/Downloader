@@ -1,20 +1,46 @@
 from pytube import YouTube
+from pytube import Playlist
 import os
 
-url_video = input()
+print("Audio only = 1, playlist = 2")
+option = int(input())
+int(option)
 
-yt = YouTube(url_video)
+if option == 1:
 
-for i in yt.streams.filter(only_audio=True):
+    url_video = input()
 
-    print(i)
+    yt = YouTube(url_video)
 
-itag = input()
+    for i in yt.streams.filter(only_audio=True):
 
-stream = yt.streams.get_by_itag(itag)
-stream.download(r'C:\Users\Adrian\Desktop\Muzica')
+        print(i)
 
-os.chdir('C:/Users/Adrian/Desktop/Muzica')
-src = stream.title+'.webm'
-dest = stream.title+'.mp3'
-os.rename(src,dest)
+    itag = input()
+
+    stream = yt.streams.get_by_itag(itag)
+    stream.download(r'C:\Users\Adrian\Desktop\Muzica')
+
+    os.chdir('C:/Users/Adrian/Desktop/Muzica')
+    src = stream.title+'.webm'
+    dest = stream.title+'.mp3'
+    os.rename(src,dest)
+
+if option==2:
+    i = 1
+    name = input()
+    p = Playlist(name)
+    s = 0
+    for vid in p.videos:
+        s+=1
+
+
+    for vid in p.videos:
+        audio = vid.streams.get_by_itag(251)
+        audio.download(r'C:\Users\Adrian\Desktop\Muzica')
+        print("Downloaded " + str(i) + "/"+str(s))
+        i+=1
+        os.chdir('C:/Users/Adrian/Desktop/Muzica')
+        src = audio.title+'.webm'
+        dest = audio.title+'.mp3'
+        os.rename(src,dest)
