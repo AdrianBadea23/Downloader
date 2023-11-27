@@ -2,6 +2,8 @@ from pytube import YouTube
 from pytube import Playlist
 import os
 
+
+path = os.getcwd()+"\Muzica"
 print("Audio only = 1, playlist = 2")
 option = int(input())
 int(option)
@@ -19,12 +21,14 @@ if option == 1:
     itag = input()
 
     stream = yt.streams.get_by_itag(itag)
-    stream.download(r'C:\Users\Adrian\Desktop\Muzica')
-
-    os.chdir('C:/Users/Adrian/Desktop/Muzica')
-    src = stream.title+'.webm'
-    dest = stream.title+'.mp3'
-    os.rename(src,dest)
+    stream.download(path)
+    try:
+        os.chdir(path)
+        src = stream.title+'.webm'
+        dest = stream.title+'.mp3'
+        os.rename(src,dest)
+    except:
+        print("Rename failed")
 
 if option==2:
     i = 1
@@ -37,10 +41,13 @@ if option==2:
 
     for vid in p.videos:
         audio = vid.streams.get_by_itag(251)
-        audio.download(r'C:\Users\Adrian\Desktop\Muzica')
+        audio.download(path)
         print("Downloaded " + str(i) + "/"+str(s))
         i+=1
-        os.chdir('C:/Users/Adrian/Desktop/Muzica')
-        src = audio.title+'.webm'
-        dest = audio.title+'.mp3'
-        os.rename(src,dest)
+        os.chdir(path)
+        try:
+            src = audio.title+'.webm'
+            dest = audio.title+'.mp3'
+            os.rename(src,dest)
+        except:
+            print("Rename failed")
