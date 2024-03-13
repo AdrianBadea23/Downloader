@@ -1,15 +1,14 @@
 from pytube import YouTube
 from pytube import Playlist
-import os
 
 
-path = os.getcwd()+"\Muzica"
-print("Audio only = 1, playlist = 2")
+path = r"C:\Users\uig62727\Desktop\Downloader\Muzica"
+print("One audio file = 1, playlist = 2")
 option = int(input())
 int(option)
 
 if option == 1:
-
+    print("Video url: ")
     url_video = input()
 
     yt = YouTube(url_video)
@@ -22,16 +21,10 @@ if option == 1:
 
     stream = yt.streams.get_by_itag(itag)
     stream.download(path)
-    try:
-        os.chdir(path)
-        src = stream.title+'.webm'
-        dest = stream.title+'.mp3'
-        os.rename(src,dest)
-    except:
-        print("Rename failed")
 
 if option==2:
     i = 1
+    print("Playlist url: ")
     name = input()
     p = Playlist(name)
     s = 0
@@ -44,10 +37,4 @@ if option==2:
         audio.download(path)
         print("Downloaded " + str(i) + "/"+str(s))
         i+=1
-        os.chdir(path)
-        try:
-            src = audio.title+'.webm'
-            dest = audio.title+'.mp3'
-            os.rename(src,dest)
-        except:
-            print("Rename failed")
+        
