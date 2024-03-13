@@ -1,11 +1,7 @@
 from pytube import YouTube
 from pytube import Playlist
+from pathlib import Path
 
-
-path = r"C:\Users\uig62727\Desktop\Downloader\Muzica"
-print("One audio file = 1, playlist = 2")
-option = int(input())
-int(option)
 
 def progressBar(iteration, total):
     fill = '█'
@@ -15,6 +11,11 @@ def progressBar(iteration, total):
 
     if iteration == total:
         print()
+
+print("One audio file = 1, playlist = 2")
+path = str(Path.cwd()) + "\Muzica"
+option = int(input())
+int(option)
 
 if option == 1:
     print("Video url: ")

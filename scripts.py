@@ -10,6 +10,6 @@ if __name__ == "__main__":
 
     script1_thread.start()
     script1_thread.join()
-    
+
     script2_thread.start()
     script2_thread.join()
